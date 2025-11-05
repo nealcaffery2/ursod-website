@@ -96,29 +96,56 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Video background fallback and initialization
-const video = document.querySelector('.video-background video');
+const video = document.getElementById('hero-video');
 const videoBackground = document.querySelector('.video-background');
 
 if (video && videoBackground) {
-    // Ensure video plays
+    // Try to play video immediately
+    const playVideo = () => {
+        if (video.readyState >= 2) {
+            video.play().catch(function(error) {
+                console.log('Video autoplay failed:', error);
+                video.classList.add('hidden');
+            });
+        }
+    };
+
+    // Ensure video plays when loaded
     video.addEventListener('loadeddata', function() {
-        video.play().catch(function(error) {
-            console.log('Video autoplay failed:', error);
-        });
+        playVideo();
     });
 
-    // Handle video errors
+    video.addEventListener('canplay', function() {
+        playVideo();
+    });
+
+    // Handle video errors - hide video and show background image
     video.addEventListener('error', function(e) {
         console.log('Video failed to load, using background image');
-        video.style.display = 'none';
+        video.classList.add('hidden');
         // Background image is already set in CSS as fallback
     });
 
     // Try to play video on load
     window.addEventListener('load', function() {
-        video.play().catch(function(error) {
-            console.log('Video autoplay prevented:', error);
-        });
+        playVideo();
     });
+
+    // Try to play on user interaction (for autoplay restrictions)
+    document.addEventListener('click', function() {
+        if (video.paused) {
+            video.play().catch(function(error) {
+                console.log('Video play prevented:', error);
+            });
+        }
+    }, { once: true });
+
+    // Fallback: if video doesn't load within 5 seconds, hide it
+    setTimeout(function() {
+        if (video.readyState < 2) {
+            console.log('Video loading timeout, using background image');
+            video.classList.add('hidden');
+        }
+    }, 5000);
 }
 
