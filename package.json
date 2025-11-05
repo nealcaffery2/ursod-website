@@ -1,0 +1,17 @@
+{
+  "name": "ursod-website",
+  "version": "1.0.0",
+  "description": "URSOD Oil & Gas Company Website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["website", "oil", "gas"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+
