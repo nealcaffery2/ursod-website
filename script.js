@@ -177,7 +177,7 @@ if (contactForm) {
         formStatus.textContent = '';
         formStatus.className = 'form-status';
         
-        // Execute reCAPTCHA v3
+        // Execute reCAPTCHA Enterprise v3
         let recaptchaToken;
         try {
             recaptchaToken = await executeRecaptcha('contact_form_submit');
