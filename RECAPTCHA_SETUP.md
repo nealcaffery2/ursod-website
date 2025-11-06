@@ -2,7 +2,11 @@
 
 ## Current Status
 
-The contact form now includes Google reCAPTCHA v2 for security. Currently, it's using a **test site key** that works for development but needs to be replaced with your own production key.
+The contact form now includes **Google reCAPTCHA v3** for security. reCAPTCHA v3 runs in the background and provides a risk score (0.0 to 1.0) without showing a checkbox to users.
+
+**Site Label**: URSOD Contact  
+**Site Key**: 6LeJxAQsAAAAAJ0TWESlEC1vst5dJrgAxxrKEwZr  
+**Secret Key**: 6LeJxAQsAAAAAFzKjh08SNeQFdpDrwO9V9ueaedc
 
 ## Get Your Own reCAPTCHA Site Key
 
@@ -14,8 +18,8 @@ The contact form now includes Google reCAPTCHA v2 for security. Currently, it's 
 
 ### Step 2: Configure Your Site
 
-1. **Label**: Enter "URSOD Contact Form" (or any name)
-2. **reCAPTCHA type**: Select **"reCAPTCHA v2"** → **"I'm not a robot" Checkbox**
+1. **Label**: Enter "URSOD Contact" (or any name)
+2. **reCAPTCHA type**: Select **"reCAPTCHA v3"** (score-based, invisible)
 3. **Domains**: Add your domains:
    - `ursod.co`
    - `www.ursod.co`
@@ -32,47 +36,70 @@ After creating the site, you'll get:
 ### Step 4: Update Your Site
 
 1. Open `index.html`
-2. Find this line (around line 269):
+2. Find the reCAPTCHA script tag (around line 14):
    ```html
-   <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" ...>
+   <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
    ```
-3. Replace `6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI` with your **Site Key**
+3. Replace `YOUR_SITE_KEY` with your **Site Key**
+4. Also update the `RECAPTCHA_SITE_KEY` constant in `script.js` (around line 107)
 
-### Step 5: Server-Side Verification (Recommended)
+### Step 5: Server-Side Verification (Required for Production)
 
-For production, you should verify the reCAPTCHA response on your server:
+**Important**: reCAPTCHA v3 requires server-side verification to check the risk score.
 
-1. When the form is submitted, send the `recaptcha` token to your server
+1. When the form is submitted, send the `recaptcha_token` to your server
 2. On your server, make a POST request to:
    ```
    https://www.google.com/recaptcha/api/siteverify
    ```
    With parameters:
-   - `secret`: Your Secret Key
+   - `secret`: Your Secret Key (6LeJxAQsAAAAAFzKjh08SNeQFdpDrwO9V9ueaedc)
    - `response`: The reCAPTCHA token from the form
    - `remoteip`: User's IP address (optional)
 
-3. Google will return a JSON response indicating if the verification passed
+3. Google will return a JSON response:
+   ```json
+   {
+     "success": true,
+     "score": 0.9,
+     "action": "contact_form_submit",
+     "challenge_ts": "2024-01-01T12:00:00Z"
+   }
+   ```
 
-## Current Test Key
+4. **Check the score**: 
+   - Score of 1.0 = very likely a human
+   - Score of 0.0 = very likely a bot
+   - **Recommended threshold**: Accept scores above 0.5
+   - For sensitive forms, use 0.7 or higher
 
-The current key (`6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI`) is Google's test key that:
-- ✅ Always passes verification (for testing)
-- ✅ Works on any domain
-- ⚠️ **Should NOT be used in production**
+## Current Production Keys
+
+✅ **Site Key**: `6LeJxAQsAAAAAJ0TWESlEC1vst5dJrgAxxrKEwZr` (configured)  
+✅ **Secret Key**: `6LeJxAQsAAAAAFzKjh08SNeQFdpDrwO9V9ueaedc` (for server-side)
+
+⚠️ **Note**: The secret key should NEVER be exposed in client-side code. Store it as an environment variable on your server.
 
 ## Security Features Added
 
-✅ **reCAPTCHA v2** - Bot protection
+✅ **reCAPTCHA v3** - Invisible, score-based bot protection
 ✅ **Input Sanitization** - Prevents XSS attacks
 ✅ **Email Validation** - Ensures valid email format
 ✅ **Character Limits** - Message field limited to 2000 characters
 ✅ **Real-time Validation** - Visual feedback on form fields
 ✅ **Form Status Messages** - Clear success/error feedback
 
+## How reCAPTCHA v3 Works
+
+- **Invisible**: No checkbox or challenge for users
+- **Score-based**: Returns a score from 0.0 (bot) to 1.0 (human)
+- **Background**: Runs automatically when the form is submitted
+- **User Experience**: Seamless - users don't see anything
+
 ## Testing
 
-1. The form will work with the test key for development
-2. Replace with your production key before going live
-3. Test the form submission to ensure reCAPTCHA appears and works
+1. ✅ Production keys are already configured
+2. Test the form submission - it should work seamlessly
+3. Check browser console for reCAPTCHA initialization message
+4. For server-side: Verify the score in your backend (recommended threshold: 0.5+)
 

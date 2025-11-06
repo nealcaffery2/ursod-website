@@ -103,17 +103,37 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// reCAPTCHA callbacks
-let recaptchaVerified = false;
+// reCAPTCHA v3 - Score-based verification
+const RECAPTCHA_SITE_KEY = '6LeJxAQsAAAAAJ0TWESlEC1vst5dJrgAxxrKEwZr';
 
-function onRecaptchaSuccess(token) {
-    recaptchaVerified = true;
-    document.getElementById('recaptcha-error').style.display = 'none';
+// Initialize reCAPTCHA v3
+function initRecaptcha() {
+    if (typeof grecaptcha !== 'undefined') {
+        grecaptcha.ready(function() {
+            // reCAPTCHA v3 is ready
+            console.log('reCAPTCHA v3 initialized');
+        });
+    }
 }
 
-function onRecaptchaExpired() {
-    recaptchaVerified = false;
-    document.getElementById('recaptcha-error').style.display = 'block';
+// Execute reCAPTCHA v3 and get token
+function executeRecaptcha(action = 'submit') {
+    return new Promise((resolve, reject) => {
+        if (typeof grecaptcha === 'undefined') {
+            reject('reCAPTCHA not loaded');
+            return;
+        }
+        
+        grecaptcha.ready(function() {
+            grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: action })
+                .then(function(token) {
+                    resolve(token);
+                })
+                .catch(function(error) {
+                    reject(error);
+                });
+        });
+    });
 }
 
 // Input sanitization function
@@ -150,25 +170,30 @@ if (contactForm) {
         });
     }
 
-    // Form validation and submission
-    contactForm.addEventListener('submit', function(e) {
+    // Form validation and submission (async for reCAPTCHA v3)
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         // Reset status
         formStatus.textContent = '';
         formStatus.className = 'form-status';
         
-        // Validate reCAPTCHA
-        if (typeof grecaptcha === 'undefined') {
-            formStatus.textContent = 'reCAPTCHA is loading. Please wait a moment and try again.';
+        // Execute reCAPTCHA v3
+        let recaptchaToken;
+        try {
+            recaptchaToken = await executeRecaptcha('contact_form_submit');
+        } catch (error) {
+            document.getElementById('recaptcha-error').textContent = 'reCAPTCHA verification failed. Please try again.';
+            document.getElementById('recaptcha-error').style.display = 'block';
+            formStatus.textContent = 'Security verification failed. Please refresh the page and try again.';
             formStatus.className = 'form-status error';
             return;
         }
         
-        const recaptchaResponse = grecaptcha.getResponse();
-        if (!recaptchaResponse || recaptchaResponse.length === 0) {
+        if (!recaptchaToken) {
+            document.getElementById('recaptcha-error').textContent = 'reCAPTCHA verification failed. Please try again.';
             document.getElementById('recaptcha-error').style.display = 'block';
-            formStatus.textContent = 'Please complete the reCAPTCHA verification';
+            formStatus.textContent = 'Security verification failed. Please refresh the page and try again.';
             formStatus.className = 'form-status error';
             return;
         }
@@ -216,7 +241,7 @@ if (contactForm) {
             company: company,
             inquiry: inquiry,
             message: message,
-            recaptcha: recaptchaResponse,
+            recaptcha_token: recaptchaToken,
             timestamp: new Date().toISOString()
         };
 
@@ -231,9 +256,8 @@ if (contactForm) {
             
             // Reset form
             contactForm.reset();
-            grecaptcha.reset();
-            recaptchaVerified = false;
             charCount.textContent = '0';
+            document.getElementById('recaptcha-error').style.display = 'none';
             
             // Re-enable submit button
             submitBtn.disabled = false;

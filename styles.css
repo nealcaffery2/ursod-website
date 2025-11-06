@@ -693,18 +693,22 @@ section {
     border-bottom-color: var(--gray-light);
 }
 
-/* reCAPTCHA styling */
-.g-recaptcha {
+/* reCAPTCHA v3 styling */
+.recaptcha-v3-note {
     margin: 15px 0;
-    display: flex;
-    justify-content: flex-start;
+    padding: 10px 0;
+    font-size: 11px;
+    color: var(--gray-medium);
+    line-height: 1.5;
 }
 
-@media (max-width: 768px) {
-    .g-recaptcha {
-        transform: scale(0.85);
-        transform-origin: 0 0;
-    }
+.recaptcha-v3-note a {
+    color: var(--gray-medium);
+    text-decoration: underline;
+}
+
+.recaptcha-v3-note a:hover {
+    color: var(--primary-black);
 }
 
 /* Footer */
