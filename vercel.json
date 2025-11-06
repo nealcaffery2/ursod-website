@@ -3,6 +3,8 @@
   "buildCommand": null,
   "outputDirectory": ".",
   "framework": null,
+  "cleanUrls": false,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/(.*)",
