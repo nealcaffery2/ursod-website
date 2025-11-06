@@ -3,6 +3,7 @@
   "buildCommand": null,
   "outputDirectory": ".",
   "framework": null,
+  "public": false,
   "redirects": [
     {
       "source": "/(.*)",
