@@ -307,6 +307,9 @@ const observer = new IntersectionObserver(function(entries) {
 
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize reCAPTCHA v3
+    initRecaptcha();
+    
     const animateElements = document.querySelectorAll('.service-card, .step-item, .stat-item');
     
     animateElements.forEach(el => {
