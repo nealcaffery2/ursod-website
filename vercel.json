@@ -17,6 +17,18 @@
       "destination": "https://ursod.co/$1",
       "permanent": true,
       "statusCode": 301
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.ursod.co"
+        }
+      ],
+      "destination": "https://ursod.co/$1",
+      "permanent": true,
+      "statusCode": 301
     }
   ],
   "headers": [
