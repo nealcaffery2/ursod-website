@@ -19,7 +19,7 @@ The contact form now includes **Google reCAPTCHA v3** for security. reCAPTCHA v3
 ### Step 2: Configure Your Site
 
 1. **Label**: Enter "URSOD Contact" (or any name)
-2. **reCAPTCHA type**: Select **"reCAPTCHA v3"** (score-based, invisible)
+2. **reCAPTCHA type**: Select **"reCAPTCHA Enterprise v3"** (score-based, invisible)
 3. **Domains**: Add your domains:
    - `ursod.co`
    - `www.ursod.co`
@@ -36,12 +36,13 @@ After creating the site, you'll get:
 ### Step 4: Update Your Site
 
 1. Open `index.html`
-2. Find the reCAPTCHA script tag (around line 14):
+2. Find the reCAPTCHA Enterprise script tag (around line 14):
    ```html
-   <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
+   <script src="https://www.google.com/recaptcha/enterprise.js?render=YOUR_SITE_KEY"></script>
    ```
 3. Replace `YOUR_SITE_KEY` with your **Site Key**
 4. Also update the `RECAPTCHA_SITE_KEY` constant in `script.js` (around line 107)
+5. Note: reCAPTCHA Enterprise uses `grecaptcha.enterprise.execute()` instead of `grecaptcha.execute()`
 
 ### Step 5: Server-Side Verification (Required for Production)
 
@@ -75,26 +76,27 @@ After creating the site, you'll get:
 
 ## Current Production Keys
 
-✅ **Site Key**: `6LeJxAQsAAAAAJ0TWESlEC1vst5dJrgAxxrKEwZr` (configured)  
-✅ **Secret Key**: `6LeJxAQsAAAAAFzKjh08SNeQFdpDrwO9V9ueaedc` (for server-side)
+✅ **Site Key**: `6LekygMsAAAAAE21dh56onPEYK9kdT5UKbscsQX9` (configured)  
+✅ **Type**: reCAPTCHA Enterprise v3
 
-⚠️ **Note**: The secret key should NEVER be exposed in client-side code. Store it as an environment variable on your server.
+⚠️ **Note**: For server-side verification, use your Enterprise secret key from the Google Cloud Console. Store it as an environment variable on your server.
 
 ## Security Features Added
 
-✅ **reCAPTCHA v3** - Invisible, score-based bot protection
+✅ **reCAPTCHA Enterprise v3** - Invisible, score-based bot protection with advanced features
 ✅ **Input Sanitization** - Prevents XSS attacks
 ✅ **Email Validation** - Ensures valid email format
 ✅ **Character Limits** - Message field limited to 2000 characters
 ✅ **Real-time Validation** - Visual feedback on form fields
 ✅ **Form Status Messages** - Clear success/error feedback
 
-## How reCAPTCHA v3 Works
+## How reCAPTCHA Enterprise v3 Works
 
 - **Invisible**: No checkbox or challenge for users
 - **Score-based**: Returns a score from 0.0 (bot) to 1.0 (human)
 - **Background**: Runs automatically when the form is submitted
 - **User Experience**: Seamless - users don't see anything
+- **Enterprise Features**: Advanced analytics, fraud detection, and more detailed insights
 
 ## Testing
 

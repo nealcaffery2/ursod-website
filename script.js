@@ -103,35 +103,34 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// reCAPTCHA v3 - Score-based verification
-const RECAPTCHA_SITE_KEY = '6LeJxAQsAAAAAJ0TWESlEC1vst5dJrgAxxrKEwZr';
+// reCAPTCHA Enterprise v3 - Score-based verification
+const RECAPTCHA_SITE_KEY = '6LekygMsAAAAAE21dh56onPEYK9kdT5UKbscsQX9';
 
-// Initialize reCAPTCHA v3
+// Initialize reCAPTCHA Enterprise
 function initRecaptcha() {
-    if (typeof grecaptcha !== 'undefined') {
-        grecaptcha.ready(function() {
-            // reCAPTCHA v3 is ready
-            console.log('reCAPTCHA v3 initialized');
+    if (typeof grecaptcha !== 'undefined' && grecaptcha.enterprise) {
+        grecaptcha.enterprise.ready(function() {
+            // reCAPTCHA Enterprise is ready
+            console.log('reCAPTCHA Enterprise initialized');
         });
     }
 }
 
-// Execute reCAPTCHA v3 and get token
-function executeRecaptcha(action = 'submit') {
+// Execute reCAPTCHA Enterprise and get token
+function executeRecaptcha(action = 'contact_form_submit') {
     return new Promise((resolve, reject) => {
-        if (typeof grecaptcha === 'undefined') {
-            reject('reCAPTCHA not loaded');
+        if (typeof grecaptcha === 'undefined' || !grecaptcha.enterprise) {
+            reject('reCAPTCHA Enterprise not loaded');
             return;
         }
         
-        grecaptcha.ready(function() {
-            grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: action })
-                .then(function(token) {
-                    resolve(token);
-                })
-                .catch(function(error) {
-                    reject(error);
-                });
+        grecaptcha.enterprise.ready(async function() {
+            try {
+                const token = await grecaptcha.enterprise.execute(RECAPTCHA_SITE_KEY, { action: action });
+                resolve(token);
+            } catch (error) {
+                reject(error);
+            }
         });
     });
 }
