@@ -24,5 +24,13 @@
    
    Then add your domain ursod.co in Vercel Settings → Domains
 
+4. ENABLE AUTO-DEPLOYMENT (IMPORTANT!):
+   → Vercel dashboard → Your project → Settings → Git
+   → Make sure Production Branch = "main"
+   → Enable "Automatic deployments from Git"
+   → DONE! Now every git push auto-deploys 🚀
+   
+   See docs/AUTO_DEPLOYMENT_SETUP.md for detailed steps
+
 ═══════════════════════════════════════════════════════════════
 

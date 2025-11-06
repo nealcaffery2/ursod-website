@@ -12,6 +12,12 @@ npm start
 ```
 
 ### Deploy to Vercel
+
+**Auto-Deployment (Recommended):**
+- Push to GitHub → Vercel auto-deploys! 🚀
+- See [docs/AUTO_DEPLOYMENT_SETUP.md](docs/AUTO_DEPLOYMENT_SETUP.md) to enable
+
+**Manual Deployment:**
 ```powershell
 .\scripts\deploy.ps1
 # Or manually: vercel --prod

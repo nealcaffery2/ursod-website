@@ -34,6 +34,18 @@ Replace `YOUR_USERNAME` with your actual GitHub username.
    - **Install Command**: `npm install`
 5. Click "Deploy"
 
+## Step 3.5: Enable Auto-Deployment ⚡
+
+**IMPORTANT:** Enable auto-deployment so every GitHub push automatically deploys!
+
+See **[AUTO_DEPLOYMENT_SETUP.md](AUTO_DEPLOYMENT_SETUP.md)** for detailed instructions.
+
+**Quick version:**
+1. Vercel dashboard → Your project → **Settings** → **Git**
+2. Make sure **Production Branch** = `main`
+3. Enable **Automatic deployments from Git**
+4. Done! Now every `git push` auto-deploys 🚀
+
 ## Step 4: Add Custom Domain (ursod.co)
 
 ### In Vercel:
@@ -82,7 +94,8 @@ Vercel automatically provides SSL certificates (HTTPS) for your domain. This hap
 
 - **Domain not working?** Check DNS propagation: [whatsmydns.net](https://www.whatsmydns.net)
 - **SSL not ready?** Wait 24 hours after DNS is configured
-- **Need to update site?** Just push to GitHub - Vercel auto-deploys on push!
+- **Auto-deployment not working?** See [AUTO_DEPLOYMENT_SETUP.md](AUTO_DEPLOYMENT_SETUP.md)
+- **Need to update site?** Just push to GitHub - Vercel auto-deploys on push! (if enabled)
 
 ## Quick Commands Reference
 
