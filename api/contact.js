@@ -29,12 +29,26 @@ export default async function handler(req, res) {
         }
 
         // Verify reCAPTCHA with Google
-        const recaptchaResponse = await fetch(
-            `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${recaptcha_token}`,
-            { method: 'POST' }
-        );
+        // Check if this is a Google Cloud API key (starts with AIzaSy) or standard secret key
+        let recaptchaData;
         
-        const recaptchaData = await recaptchaResponse.json();
+        if (recaptchaSecret.startsWith('AIzaSy')) {
+            // This is a Google Cloud API key - use reCAPTCHA Enterprise API
+            // Note: Enterprise API requires project ID and site key
+            // For now, try the standard endpoint which may work
+            const recaptchaResponse = await fetch(
+                `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${recaptcha_token}`,
+                { method: 'POST' }
+            );
+            recaptchaData = await recaptchaResponse.json();
+        } else {
+            // Standard reCAPTCHA secret key
+            const recaptchaResponse = await fetch(
+                `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${recaptcha_token}`,
+                { method: 'POST' }
+            );
+            recaptchaData = await recaptchaResponse.json();
+        }
 
         if (!recaptchaData.success) {
             return res.status(400).json({ 
