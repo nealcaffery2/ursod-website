@@ -240,17 +240,40 @@ if (contactForm) {
             company: company,
             inquiry: inquiry,
             message: message,
-            recaptcha_token: recaptchaToken,
-            timestamp: new Date().toISOString()
+            recaptcha_token: recaptchaToken
         };
 
-        // Here you would send the data to your server
-        // For now, simulate API call
-        setTimeout(() => {
-            console.log('Form submitted:', formData);
-            
-            // Show success message
-            formStatus.textContent = 'Thank you for your inquiry. We will get back to you soon!';
+        // Send form data to API endpoint
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                // Handle error response
+                formStatus.textContent = result.details || result.error || 'An error occurred. Please try again.';
+                formStatus.className = 'form-status error';
+                
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+                
+                // Clear status after 5 seconds
+                setTimeout(() => {
+                    formStatus.textContent = '';
+                    formStatus.className = 'form-status';
+                }, 5000);
+                return;
+            }
+
+            // Success - show success message
+            formStatus.textContent = result.message || 'Thank you for your inquiry. We will get back to you soon!';
             formStatus.className = 'form-status success';
             
             // Reset form
@@ -267,7 +290,22 @@ if (contactForm) {
                 formStatus.textContent = '';
                 formStatus.className = 'form-status';
             }, 5000);
-        }, 1000);
+
+        } catch (error) {
+            console.error('Form submission error:', error);
+            formStatus.textContent = 'Network error. Please check your connection and try again.';
+            formStatus.className = 'form-status error';
+            
+            // Re-enable submit button
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+            
+            // Clear status after 5 seconds
+            setTimeout(() => {
+                formStatus.textContent = '';
+                formStatus.className = 'form-status';
+            }, 5000);
+        }
     });
     
     // Real-time validation
