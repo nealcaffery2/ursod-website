@@ -5,6 +5,12 @@
   "framework": null,
   "cleanUrls": false,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap.xml"
+    }
+  ],
   "redirects": [
     {
       "source": "/(.*)",
