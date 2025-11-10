@@ -1,8 +1,10 @@
 User-agent: *
 Allow: /
 
-# Sitemap
+# Updated: 2025-11-10
+# Sitemaps
 Sitemap: https://ursod.co/sitemap.xml
+Sitemap: https://ursod.co/api/sitemap.xml
 
 # Disallow admin or private areas (if any)
 # Disallow: /admin/

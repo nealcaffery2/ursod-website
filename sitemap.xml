@@ -8,20 +8,20 @@
   <!-- Homepage - Highest Priority -->
   <url>
     <loc>https://ursod.co/</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://ursod.co/og-image.jpg</image:loc>
-      <image:title>URSOD - Oil & Gas Acquisition & Exploration</image:title>
-      <image:caption>Premier oil & gas acquisition and exploration company</image:caption>
+      <image:title>URSOD - Oil &amp; Gas Acquisition &amp; Exploration</image:title>
+      <image:caption>Premier oil &amp; gas acquisition and exploration company</image:caption>
     </image:image>
   </url>
   
   <!-- Services -->
   <url>
     <loc>https://ursod.co/raising-money.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -29,43 +29,43 @@
   <!-- Upstream Category Pages -->
   <url>
     <loc>https://ursod.co/upstream.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ursod.co/upstream-minerals.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/upstream-lease.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/upstream-permian.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/upstream-haynes.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/upstream-eagle-ford.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/upstream-bakken.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -73,31 +73,31 @@
   <!-- Midstream Category Pages -->
   <url>
     <loc>https://ursod.co/midstream.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ursod.co/midstream-vopak.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/midstream-kinder.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/midstream-fob.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/midstream-spot.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -105,37 +105,37 @@
   <!-- Commercial Real Estate Pages -->
   <url>
     <loc>https://ursod.co/office.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/industrial.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/multifamily.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/self-storage.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/btr.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ursod.co/datacenter.html</loc>
-    <lastmod>2025-11-06</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
